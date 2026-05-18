@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Courier;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class CourierRepository
@@ -26,20 +25,21 @@ class CourierRepository
         return $courier;
     }
 
-    public function storeOrUpdateCourier(array $request, $id = null, $method = null) : void {
-        if (request()->method() == 'PUT' || request()->method() == 'PATCH') {
-            if (!$this->courier->whereId($id)->first()) {
-                throw new ModelNotFoundException;
-            }
-
-            $this->courier->updateOrCreate(
-                ['id' => $id],
-                $request
-            );
+    public function storeOrUpdateCourier(array $request, ?string $id = null) {
+        if ($id) {
+            $courier = $this->courier->findOrFail($id);
+            $courier->update($request);
+            return $courier;
         }
+
+        $courier = $this->courier->create($request);
+
+        return $courier;
     }
 
-    public function deleteCourier(string $id) : void {
-        $this->courier->delete($id);
+    public function deleteCourier(string $id) : Courier {
+        $courier = $this->courier->delete($id);
+
+        return $courier;
     }
 }

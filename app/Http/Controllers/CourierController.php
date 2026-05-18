@@ -44,18 +44,19 @@ class CourierController extends Controller
 
         DB::beginTransaction();
         try {
-            $this->courierService->storeOrUpdateCourier($validatedData);
+            $response = $this->courierService->storeOrUpdateCourier($validatedData);
             DB::commit();
 
             return response()->json([
                 "status" => 201,
-                "message" => "success"
+                "message" => "success",
+                "data" => new CourierResource($response)
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
                 "status" => 500,
-                "message" => "failed",
+                "message" => "failed"
             ], 500);
         }
     }
@@ -89,18 +90,20 @@ class CourierController extends Controller
 
         DB::beginTransaction();
         try {
-            $this->courierService->storeOrUpdateCourier($validatedData, $courier->id);
+            $response = $this->courierService->storeOrUpdateCourier($validatedData, $courier->id);
             DB::commit();
 
             return response()->json([
                 "status" => 200,
-                "message" => "success"
-            ], 201);
+                "message" => "success",
+                "data" => new CourierResource($response)
+            ], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
                 "status" => 500,
                 "message" => "failed",
+                "error" => $e->getMessage()
             ], 500);
         }
     }

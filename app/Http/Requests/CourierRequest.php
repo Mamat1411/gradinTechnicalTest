@@ -28,10 +28,10 @@ class CourierRequest extends FormRequest
         $isUpdate = in_array($this->method(), ['PUT', 'PATCH']);
 
         return [
-            "employee_code" => [$isUpdate ? 'sometimes' : 'required', 'string', 'min:6', 'max:6'],
+            "employee_code" => [$isUpdate ? 'sometimes' : 'required', 'string', 'min:6', 'max:6', Rule::unique('couriers')->ignore($this->courier?->id)],
             "full_name" => [$isUpdate ? 'sometimes' : 'required', 'string', 'min:3', 'max:100'],
-            "email" => [$isUpdate ? 'sometimes' : 'required', 'email:dns'],
-            "phone_number" => [$isUpdate ? 'sometimes' : 'required', 'string'],
+            "email" => [$isUpdate ? 'sometimes' : 'required', 'email:dns', Rule::unique('couriers')->ignore($this->courier?->id)],
+            "phone_number" => [$isUpdate ? 'sometimes' : 'required', 'string', Rule::unique('couriers')->ignore($this->courier?->id)],
             "level" => [$isUpdate ? 'sometimes' : 'required', 'in:1,2,3,4,5'],
             "status" => [$isUpdate ? 'sometimes' : 'required', 'string', Rule::enum(EmploymentStatus::class)],
             "employment_type" => [$isUpdate ? 'sometimes' : 'required', 'string', Rule::enum(EmploymentType::class)]

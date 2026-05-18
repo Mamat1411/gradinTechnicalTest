@@ -26,11 +26,15 @@ class CourierService
         return $courier;
     }
 
-    public function storeOrUpdateCourier($request, $id = null, $method = null) : void {
-        $this->courierRepository->storeOrUpdateCourier($request, $id, $method);
+    public function storeOrUpdateCourier(array $request, ?string $id = null) {
+        $courier = $this->courierRepository->storeOrUpdateCourier($request, $id);
+
+        return $courier;
     }
 
-    public function deleteCourier(string $id) : void {
-        $this->courierRepository->deleteCourier($id);
+    public function deleteCourier(string $id) : Courier {
+        $courier = $this->courierRepository->deleteCourier($id);
+
+        return $courier;
     }
 }
