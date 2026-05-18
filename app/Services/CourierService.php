@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Courier;
 use App\Repositories\CourierRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -19,11 +20,17 @@ class CourierService
         return $couriers;
     }
 
+    public function findCourierById(string $id) : Courier {
+        $courier = $this->courierRepository->getCourierById($id);
+
+        return $courier;
+    }
+
     public function storeOrUpdateCourier($request, $id = null, $method = null) : void {
         $this->courierRepository->storeOrUpdateCourier($request, $id, $method);
     }
 
-    public function deleteCourier($id) : void {
+    public function deleteCourier(string $id) : void {
         $this->courierRepository->deleteCourier($id);
     }
 }

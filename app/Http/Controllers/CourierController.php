@@ -52,6 +52,7 @@ class CourierController extends Controller
                 "message" => "success"
             ], 201);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 "status" => 500,
                 "message" => "failed",
@@ -65,10 +66,11 @@ class CourierController extends Controller
     public function show(Courier $courier)
     {
         try {
-           return response()->json([
+            $response = $this->courierService->findCourierById($courier->id);
+            return response()->json([
                 "status" => 200,
                 "message" => "success",
-                "data" => new CourierResource($courier),
+                "data" => new CourierResource($response),
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -95,6 +97,7 @@ class CourierController extends Controller
                 "message" => "success"
             ], 201);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 "status" => 500,
                 "message" => "failed",

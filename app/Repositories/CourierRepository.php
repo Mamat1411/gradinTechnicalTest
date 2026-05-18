@@ -20,6 +20,12 @@ class CourierRepository
         return $couriers;
     }
 
+    public function getCourierById(string $id) : Courier {
+        $courier = $this->courier->find($id, ["*"]);
+
+        return $courier;
+    }
+
     public function storeOrUpdateCourier(array $request, $id = null, $method = null) : void {
         if (request()->method() == 'PUT' || request()->method() == 'PATCH') {
             if (!$this->courier->whereId($id)->first()) {
@@ -33,7 +39,7 @@ class CourierRepository
         }
     }
 
-    public function deleteCourier($id) : void {
+    public function deleteCourier(string $id) : void {
         $this->courier->delete($id);
     }
 }
