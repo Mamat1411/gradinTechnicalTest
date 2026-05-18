@@ -14,6 +14,7 @@ class Courier extends Model
     /** @use HasFactory<\Database\Factories\CourierFactory> */
     use HasFactory, HasUuids, SoftDeletes;
 
+    public $keyType = 'string';
     public $incrementing = false;
 
     public $guarded = ['id'];
