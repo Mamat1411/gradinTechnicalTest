@@ -31,10 +31,10 @@ class CourierRequest extends FormRequest
             "employee_code" => [$isUpdate ? 'sometimes' : 'required', 'string', 'min:6', 'max:6'],
             "full_name" => [$isUpdate ? 'sometimes' : 'required', 'string', 'min:3', 'max:100'],
             "email" => [$isUpdate ? 'sometimes' : 'required', 'email:dns'],
-            "phone_number" => [$isUpdate ? 'sometimes' : 'required', 'string', 'numeric', 'max_digits:25'],
+            "phone_number" => [$isUpdate ? 'sometimes' : 'required', 'string'],
             "level" => [$isUpdate ? 'sometimes' : 'required', 'in:1,2,3,4,5'],
-            "status" => [$isUpdate ? 'sometimes' : 'required', 'string', Rule::enum(EmploymentStatus::cases())],
-            "employment_type" => [$isUpdate ? 'sometimes' : 'required', 'string', Rule::enum(EmploymentType::cases())]
+            "status" => [$isUpdate ? 'sometimes' : 'required', 'string', Rule::enum(EmploymentStatus::class)],
+            "employment_type" => [$isUpdate ? 'sometimes' : 'required', 'string', Rule::enum(EmploymentType::class)]
         ];
     }
 }
