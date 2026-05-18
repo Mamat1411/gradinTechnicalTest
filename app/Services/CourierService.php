@@ -24,6 +24,6 @@ class CourierService
     }
 
     public function deleteCourier($id) : void {
-
+        $this->courierRepository->deleteCourier($id);
     }
 }
