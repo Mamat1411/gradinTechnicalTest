@@ -1,4 +1,4 @@
-# [Gradin Techincal Test]
+# [Gradin Technical Test]
 
 Aplikasi Backend CRUD Kurir yang dibangun dengan Laravel.
 
@@ -20,8 +20,8 @@ Ikuti langkah-langkah berikut untuk menjalankan aplikasi secara lokal:
 
 1. **Clone repositori**
    ```bash
-   git clone [URL_REPO_ANDA]
-   cd [NAMA_FOLDER_REPO]
+   git clone https://github.com/Mamat1411/gradinTechnicalTest.git
+   cd gradinTechnicalTest
    ```
 
 2. **Install dependensi PHP via Composer**
