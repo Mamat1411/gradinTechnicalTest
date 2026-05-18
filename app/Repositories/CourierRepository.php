@@ -37,8 +37,9 @@ class CourierRepository
         return $courier;
     }
 
-    public function deleteCourier(string $id) : Courier {
-        $courier = $this->courier->delete($id);
+    public function deleteCourier(string $id) {
+        $courier = $this->courier->findOrFail($id);
+        $courier->delete();
 
         return $courier;
     }

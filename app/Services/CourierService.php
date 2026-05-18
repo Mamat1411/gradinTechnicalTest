@@ -32,7 +32,7 @@ class CourierService
         return $courier;
     }
 
-    public function deleteCourier(string $id) : Courier {
+    public function deleteCourier(string $id) {
         $courier = $this->courierRepository->deleteCourier($id);
 
         return $courier;
