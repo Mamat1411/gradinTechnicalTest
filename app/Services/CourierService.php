@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Courier;
 use App\Repositories\CourierRepository;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class CourierService
 {

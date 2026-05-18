@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Courier;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class CourierRepository
 {
