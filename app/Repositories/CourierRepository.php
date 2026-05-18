@@ -13,8 +13,8 @@ class CourierRepository
     public function __construct(private Courier $courier)
     {}
 
-    public function getCouriers() : LengthAwarePaginator {
-        $couriers = $this->courier->orderBy('full_name', 'asc')->paginate(7);
+    public function getCouriers(?array $search = null) {
+        $couriers = $this->courier->query()->search($search)->orderBy('full_name', 'asc')->paginate(7)->withQueryString();
 
         return $couriers;
     }

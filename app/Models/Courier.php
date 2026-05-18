@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Schema\Builder;
 
 class Courier extends Model
 {
@@ -20,9 +19,13 @@ class Courier extends Model
     public $guarded = ['id'];
 
     #[Scope]
-    protected function search(Builder $query, ?string $keyword) : Builder {
-        $query->when($keyword ?? false, function ($query, $keyword) {
-           return $query->where(['full_name'], 'like', '%' . $keyword . '%');
+    protected function search($query, ?array $keywords) {
+        $query->when($keywords['search'] ?? false, function ($query, $search) {
+           return $query->where('full_name', 'like', '%' . $search . '%');
+        });
+
+        $query->when($keywords['levels'] ?? false, function ($query, ?array $levels) {
+            return $query->whereIn('level', $levels);
         });
 
         return $query;

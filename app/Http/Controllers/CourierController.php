@@ -19,7 +19,7 @@ class CourierController extends Controller
     public function index()
     {
         try {
-            $couriers = $this->courierService->getCouriers();
+            $couriers = $this->courierService->getCouriers(request(['search', 'level']));
             $response = CourierResource::collection($couriers);
 
             return response()->json([

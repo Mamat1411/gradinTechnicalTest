@@ -14,8 +14,8 @@ class CourierService
     public function __construct(private CourierRepository $courierRepository)
     {}
 
-    public function getCouriers() :LengthAwarePaginator{
-        $couriers = $this->courierRepository->getCouriers();
+    public function getCouriers(?array $search = null) {
+        $couriers = $this->courierRepository->getCouriers($search);
 
         return $couriers;
     }
