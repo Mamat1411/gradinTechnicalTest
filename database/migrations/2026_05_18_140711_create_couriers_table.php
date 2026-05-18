@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('employee_code', 6)->unique();
             $table->string('full_name', 100);
             $table->string('email', 100)->unique();
-            $table->string('phone_number', 25)->unique();
+            $table->string('phone_number', 50)->unique();
             $table->enum('level', [1, 2, 3, 4, 5]);
             $table->enum('status', ['active', 'inactive', 'suspended', 'on_leave'])->default('active');
             $table->enum('employment_type', ['internal', 'vendor', 'freelance'])->default('internal');
